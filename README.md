@@ -12,7 +12,7 @@ This is a WAV file parser designed to extract header metadata and amplitude data
 
 ## Examples
 
-### When using Node
+### Using Node
 
 ```ts
 // start by getting the byte data of a given WAV file
@@ -34,4 +34,29 @@ const {
   amplitudeData,
 } = readFile(buffer)
 // amplitudeData will be a TypedArray
+```
+
+### In the browser
+
+```ts
+// get a File object somehow
+
+const readFileAsArrayBuffer = async (f: File): Promise<ArrayBuffer> => {
+  const reader = new FileReader();
+
+  return new Promise((res) => {
+    reader.onload = (event) => {
+      const result = event.target?.result as ArrayBuffer;
+      res(result);
+    };
+
+    reader.readAsArrayBuffer(f);
+  });
+};
+
+// turn file ref into ArrayBuffer of byte data
+const arrBuffer = await readFileAsArrayBuffer(file)
+
+// read the header info
+const { header, offset } = parseHead(arrBuffer)
 ```
