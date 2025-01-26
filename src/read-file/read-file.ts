@@ -1,16 +1,10 @@
 import parseHead, { ParsedHead } from '../parse-header/parse-head';
 import { FORMAT_CODE, FILE_FOMAT } from '../types';
 import { AMP_READERS } from './constants';
+import { TypedArray } from './types';
 
 export type ReadFile = ParsedHead['header'] & {
-  amplitudeData: (
-    | Uint8Array
-    | Int8Array
-    | Int16Array
-    | Int32Array
-    | Float32Array
-    | Float64Array
-  )[];
+  amplitudeData: TypedArray[];
 };
 
 /**
