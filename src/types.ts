@@ -1,3 +1,5 @@
+import type { ExtendedBuffer } from './extended-buffer';
+
 /**
  * format code representing how byte data is stored
  */
@@ -24,7 +26,7 @@ export type PickMatching<T, V> = {
 export type Nullable<T> = T | null | undefined;
 
 export type ReadFunction = keyof Pick<
-  Buffer,
+  ReturnType<typeof ExtendedBuffer>,
   | 'readUInt8'
   | 'readUIntLE'
   | 'readIntLE'
@@ -37,8 +39,3 @@ export type ReadFunction = keyof Pick<
   | 'readString'
   | 'readALaw'
 >;
-
-// export type ReaderFunc = keyof PickMatching<
-//   Buffer,
-//   (offset: number, byteLength: number) => number | string
-// >;

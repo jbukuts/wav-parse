@@ -1,7 +1,8 @@
-import type { Buffer } from 'buffer';
 import { BYTE_READERS } from 'src/constant';
 import { ChunkAsObject, Header, HeaderChunk } from './types';
 import { COMMON_CHUNK, GENERIC_CHUNK, SUPP_HEADER_CHUNKS } from './constants';
+import type { Buffer as BrowserBuffer } from 'buffer/index';
+import { ExtendedBuffer } from 'src/extended-buffer';
 
 export type ParsedHead = {
   header: Header;
@@ -14,8 +15,11 @@ export type ParsedHead = {
  * @param buffer represents byte data of wav file
  * @returns
  */
-export default function parseHead(buffer: Buffer): ParsedHead {
+export default function parseHead(
+  data: BrowserBuffer | ArrayBuffer
+): ParsedHead {
   let offset = 0;
+  const buffer = ExtendedBuffer(data);
 
   // helper to read given chunk
   const readChunk = <T extends HeaderChunk>(table: T, chnkSize?: number) => {
@@ -26,8 +30,9 @@ export default function parseHead(buffer: Buffer): ParsedHead {
       if (offset >= max) break;
 
       const { sz, type } = table[key];
-
       const reader = BYTE_READERS[type][sz];
+
+      // @ts-expect-error some fucntions have no second param
       const val = buffer[reader](offset, sz);
       data[key] = val;
       offset += sz;
@@ -66,8 +71,6 @@ export default function parseHead(buffer: Buffer): ParsedHead {
       ...d
     };
   }
-
-  // calculated derived metadata
 
   return {
     header: header as unknown as Header,

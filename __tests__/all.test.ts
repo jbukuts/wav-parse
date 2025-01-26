@@ -1,7 +1,6 @@
-import { describe, it } from 'node:test';
+import { describe, it, expect } from 'vitest';
 import fs from 'fs';
-import assert from 'assert';
-import { parseHead } from '../../src';
+import { readFile } from '../src';
 
 const TESTS = [
   {
@@ -36,19 +35,19 @@ const TESTS = [
   }
 ];
 
-describe('parseHead', () => {
+describe('wav-parse', () => {
   for (const t of TESTS) {
     const { title, path, expected } = t;
 
-    it(`can parse header of ${title}`, () => {
+    it(`can parse ${title}`, () => {
       const [bps, fmtType, subCode] = expected;
 
       const b = fs.readFileSync(`./test_files/${path}`);
-      const { header } = parseHead(b);
+      const { fmt } = readFile(b);
 
-      assert.strictEqual(header.fmt.bitsPerSample, bps);
-      assert.strictEqual(header.fmt.formatType, fmtType);
-      assert.strictEqual(header.fmt.subCode, subCode);
+      expect(fmt.bitsPerSample).toBe(bps);
+      expect(fmt.formatType).toBe(fmtType);
+      expect(fmt.subCode).toBe(subCode);
     });
   }
 });

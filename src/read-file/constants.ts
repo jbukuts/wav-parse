@@ -21,7 +21,8 @@ export const AMP_READERS: AmpReader = {
     [FORMAT_CODE.WAVE_FORMAT_PCM]: {
       1: { f: 'readUIntLE', arr: Uint8Array },
       2: { f: 'readIntLE', arr: Int16Array },
-      3: { f: 'readIntLE', arr: Int32Array }
+      3: { f: 'readIntLE', arr: Int32Array },
+      4: { f: 'readIntLE', arr: Int32Array }
     },
     [FORMAT_CODE.WAVE_FORMAT_IEEE_FLOAT]: {
       4: { f: 'readFloatLE', arr: Float32Array },
@@ -39,7 +40,8 @@ export const AMP_READERS: AmpReader = {
     [FORMAT_CODE.WAVE_FORMAT_PCM]: {
       1: { f: 'readUIntBE', arr: Uint8Array },
       2: { f: 'readIntBE', arr: Int16Array },
-      3: { f: 'readIntBE', arr: Int32Array }
+      3: { f: 'readIntBE', arr: Int32Array },
+      4: { f: 'readIntBE', arr: Int32Array }
     },
     [FORMAT_CODE.WAVE_FORMAT_IEEE_FLOAT]: {
       4: { f: 'readFloatBE', arr: Float32Array },
