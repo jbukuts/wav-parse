@@ -1,3 +1,6 @@
 node_modules/
 coverage/
 test.ts
+
+demo/node_modules/
+demo/dist/

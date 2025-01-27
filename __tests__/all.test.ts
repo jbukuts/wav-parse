@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'fs';
-import { readFile } from '../src';
+import { readFile } from 'src';
 
 const TESTS = [
   {
@@ -32,6 +32,11 @@ const TESTS = [
     title: 'extended float32 file',
     path: 'M1F1-float32WE-AFsp.wav',
     expected: [32, 65534, 3]
+  },
+  {
+    title: 'A-law encoded file',
+    path: 'M1F1-Alaw-AFsp.wav',
+    expected: [8, 6, undefined]
   }
 ];
 
