@@ -5,7 +5,7 @@ This is a WAV file parser designed to extract header metadata and amplitude data
 - Little/big endian encoding
 - WAV Extensible data
   - A-law amplitude data
-  - Mu-law amplitude data
+  - ~Mu-law amplitude data~ (need to add reader function)
   - Uncommon header chunks like `fact`/`peak`
 
 > This package is designed to run in both browser and Node environments. Because of this `feross/buffer` is being used under the hood to facilitate this and allow me to extend the `Buffer` class with custom readers without affecting the native `Buffer` in Node.
